@@ -28,9 +28,9 @@
       <div class="chat-section">
         <div id="chat-container">
 
-          <div class="distance-user-chat">
+          <!-- <div class="distance-user-chat">
             <h5>Hi</h5>
-          </div>
+          </div> -->
         </div>
         <form action="" id="chat-form">
           <input type="text" name="message" id="message" class="border" placeholder="Enter Message" required>
@@ -78,20 +78,35 @@
         url: '/save-chat',
         type: 'post',
         data: { sender_id: sender_id, receiver_id: receiver_id, message: message },
-        success:function(data){
-          if(data.message){
+        success:function(response){
+          // console.log(response.success);
+          // console.log(response.data);
+          if(response.success){
             $('#message').val('');
-            let chat = data.message;
+            let chat = response.data.message;
             let html = `
                 <div class="current-user-chat">
                   <h5 >`+ chat + `</h5>
                 </div>
             `;
+            $('#chat-container').append(html);
+            socket.emit('newChat',response.data);
           }else{
-            alert(data.message);
+            alert(response.data.message);
           }
         }
       });
+    });
+    socket.on('loadNewChat',function(data){
+      if(sender_id == data.receiver_id && receiver_id == data.sender_id){
+        let html = `
+            <div class="distance-user-chat">
+              <h5 >`+ data.message + `</h5>
+            </div>
+        `;
+        $('#chat-container').append(html);
+      }
+     
     });
   });
   </script>

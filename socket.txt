@@ -48,5 +48,21 @@ userc.on('connection',async function(socket){
 
     });
 
-    
+     //chating implements ==>this code implements
+    socket.on('newChat',function(data){
+        socket.broadcast.emit('loadNewChat',data);
+    });
 });
+
+// dashboard.ejs file code using
+ socket.on('loadNewChat',function(data){
+      if(sender_id == data.receiver_id && receiver_id == data.sender_id){
+        let html = `
+            <div class="distance-user-chat">
+              <h5 >`+ data.message + `</h5>
+            </div>
+        `;
+        $('#chat-container').append(html);
+      }
+     
+    });

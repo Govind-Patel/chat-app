@@ -30,6 +30,10 @@ userc.on('connection',async function(socket){
 
     });
 
+    //chating implements
+    socket.on('newChat',function(data){
+        socket.broadcast.emit('loadNewChat',data);
+    });
     
 });
 
