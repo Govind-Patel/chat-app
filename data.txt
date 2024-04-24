@@ -1,0 +1,13 @@
+1.  npm init
+2.  npm i express
+3.  mkdir models
+4.  npm install mongodb mongoose multer bcrypt express-session body-parser dotenv ejs socket.io
+5.  mkdir controllers views routes public middlewares 
+6.  touch models/userModel.js  touch models/chatModel.js touch routes/userRoute.js
+7.  mkdir public/images
+8.  touch views/register.ejs
+9.  touch views/login.ejs
+10. touch views/dashboard.ejs
+11. mkdir layout
+12. touch views/layout/header.ejs footer.ejs
+

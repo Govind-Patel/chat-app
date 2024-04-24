@@ -1,0 +1,50 @@
+1. User Register .
+2. User Login .
+3. User Dashboard .
+4. Show all Users on Dashboard	.
+5. User can see , Who is online or offline .
+6. User Can chat with all Users .
+7. User Can Update your chats .
+8. User can Delete your Chats .
+9. I will try to show chat Nootification to User .
+
+
+#Dynamic chat app Setup 
+1. Install Packages.
+2. Create MVC Folder Structure.
+3. Run Project.
+
+#Dynamic chat app Setup 
+1.  Create Register and chat models.
+
+#Dynamic chat app
+1.  User Login and Logout with Session.
+
+#Dynamic Chat App 
+1.  Fixed one issue.
+2.  Create an Auth Middleware for 
+    checking user Authentication.
+
+#Dynamic Chat App 
+1.  Integrate the user Dashboard Template.
+
+#Dynamic Chat App 
+1.  Show Users on User Dashboard , but not loggined User.
+2.  Cheate Chat Form.
+
+#Dynamic chat App
+1.  How to Update the User Status Online or Offline in DB?
+
+### We hvae 3 Scenarios for Offline Status ###
+1.  On User Logout.
+2.  On Tab Close or Browser Close or
+    Suddenly System Shutdown.
+3. On Cut the Internet Connection.
+
+#Dynamic Chat App
+    Q. How to Show Users are Offline or Online 
+        using Socket.IO?
+
+#Dynamic Chat App----
+1.  Chat with Users
+2.  We need to Fixed some thing in this 
