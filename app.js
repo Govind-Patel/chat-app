@@ -7,6 +7,7 @@ let app = express();
 const http = require('http').Server(app);
 const userRoute = require('./routes/userRoute');
 const User = require('./models/userModel');
+const Chat = require('./models/chatModel');
 
 app.use('/',userRoute);
 
@@ -35,6 +36,22 @@ userc.on('connection',async function(socket){
         socket.broadcast.emit('loadNewChat',data);
     });
     
+    // load old chat 
+    socket.on('existsChat', async function(data) {
+        // console.log(data);
+        var chats = await Chat.find({ 
+            $or: [
+                { sender_id: data.sender_id, receiver_id: data.receiver_id },
+                { sender_id: data.receiver_id, receiver_id: data.sender_id },
+            ]
+        });
+    
+        // console.log("Govind", chats);
+    
+        socket.emit('loadsChat', { chats: chats });
+    });
+    
+
 });
 
 
