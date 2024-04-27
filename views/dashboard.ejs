@@ -34,14 +34,15 @@
         </div>
         <form action="" id="chat-form">
           <input type="text" name="message" id="message" class="border" placeholder="Enter Message" required>
-          <input type="submit" name="" id="" value="Sned Messagw" class="btn btn-primary">
+          <input type="submit" name="" id="" value="Send message" class="btn btn-primary">
         </form>
       </div>
     </div>
   </div>
   <script>
     var sender_id = '<%= user._id %>';
-    var receiver_id;
+    var receiver_id; // Global variable
+
     var socket = io('/user-name', {
       auth: {
         token: sender_id
@@ -51,10 +52,16 @@
     $(document).ready(function ($) {
       $('.user-list').click(function () {
         var userId = $(this).attr('data-id');
-        var receiver_id = userId;
+        receiver_id = userId; // Assign to the global variable instead of creating a new one
         $('.start-head').hide();
         $('.chat-section').show();
+
+        socket.emit('existsChat', { sender_id: sender_id, receiver_id: receiver_id });
       });
+
+      // Other parts of your code...
+
+
 
       // update user online user status
       socket.on('getOnlineUser', function (data) {
@@ -74,13 +81,14 @@
     $('#chat-form').submit(function(event) {
       event.preventDefault();
       var message = $('#message').val();
+      // console.log(receiver_id);
       $.ajax({
         url: '/save-chat',
         type: 'post',
         data: { sender_id: sender_id, receiver_id: receiver_id, message: message },
         success:function(response){
           // console.log(response.success);
-          // console.log(response.data);
+          console.log(response.data);
           if(response.success){
             $('#message').val('');
             let chat = response.data.message;
@@ -108,6 +116,29 @@
       }
      
     });
+
+      // load old chats 
+    socket.on('loadsChat', function(data) {
+    $('#chat-container').html('');
+    var chats = data.chats;
+    let html = '';
+    for (let x = 0; x < chats.length; x++) {
+      let addClass;
+      if (chats[x]['sender_id'] == sender_id) {
+        addClass = 'current-user-chat';
+      } else {
+        addClass = 'distance-user-chat';
+      }
+      html += `
+          <div class='` + addClass + `'>
+            <h5 >` + chats[x]['message'] + `</h5>
+          </div>
+      `;
+    }
+    $('#chat-container').append(html);
   });
+
+});
+
   </script>
   <%- include('layout/footer.ejs') %>
