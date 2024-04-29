@@ -53,3 +53,12 @@
 1.  Load old Chats.
 2.  Refresh Chat Cantainer for every Users
 
+#Dynamic Chat App ==
+1.  How to Fixed The Chat Scrolling issue?
+
+#Dynamic chat app == 
+1.  Users can Delete the own chat only.
+2.  Add a confirmation popup before to delete the message.
+
+#Dynamic Chat App ==
+1.  How to Update the user Chats?

@@ -31,28 +31,20 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage:storage});
 
-const userControlle = require('../controllers/userController');
+const userController = require('../controllers/userController');
 
 const auth = require('../middleware/auth');
 
-user_route.get('/register',auth.isLogout,userControlle.registerLoad);
-user_route.post('/register',upload.single('image'),userControlle.register);
+user_route.get('/register',auth.isLogout,userController.registerLoad);
+user_route.post('/register',upload.single('image'),userController.register);
 
-user_route.get('/',auth.isLogout,userControlle.loadLogin);
-user_route.post('/',userControlle.login);
-user_route.get('/logout',auth.isLogin,userControlle.logout);
+user_route.get('/',auth.isLogout,userController.loadLogin);
+user_route.post('/',userController.login);
+user_route.get('/logout',auth.isLogin,userController.logout);
 
-user_route.get('/dashboard',auth.isLogin,userControlle.loadDashboard);
+user_route.get('/dashboard',auth.isLogin,userController.loadDashboard);
 
-user_route.post('/save-chat',userControlle.saveChat);
-
-// user_route.get('/register',userControlle.registerLoad);
-// user_route.post('/register',upload.single('image'),userControlle.register);
-
-// user_route.get('/',userControlle.loadLogin);
-// user_route.post('/',userControlle.login);
-// user_route.get('/logout',userControlle.logout);
-
-// user_route.get('/dashboard',userControlle.loadDashboard);
+user_route.post('/save-chat',userController.saveChat);
+user_route.post('/delete-chat',userController.deleteChat);
 
 module.exports = user_route;
