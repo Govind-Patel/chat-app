@@ -57,6 +57,10 @@ userc.on('connection',async function(socket){
         socket.broadcast.emit('chatMessageDeleted',id);
     });
 
+    //update chat
+    socket.on('chatUpdated',function(data){
+        socket.broadcast.emit('chatMessageUpdate',data);
+    })
 });
 
 

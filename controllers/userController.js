@@ -100,4 +100,13 @@ const deleteChat = async (req,res) =>{
     }
 }
 
-module.exports = { registerLoad, register, loadLogin, login, logout, loadDashboard,saveChat,deleteChat}
+const updateChat = async (req,res)=>{
+    try {
+      await Chat.findByIdAndUpdate({_id:req.body.id},{$set:{message:req.body.message}})
+      res.status(200).send({success:true});
+    } catch (error) {
+        alert(error.msg);
+    }
+}
+
+module.exports = { registerLoad, register, loadLogin, login, logout, loadDashboard,saveChat,deleteChat,updateChat}
