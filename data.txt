@@ -10,4 +10,5 @@
 10. touch views/dashboard.ejs
 11. mkdir layout
 12. touch views/layout/header.ejs footer.ejs
+13. npm i cookie-parser
 
