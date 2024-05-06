@@ -44,6 +44,8 @@ const login = async(req,res)=>{
                 // console.log(passwordMatch);
                 if(passwordMatch){
                     req.session.user = userData;
+                    res.cookie('userCookie',JSON.stringify(userData));
+                    // res.cookie('userCookie',JSON.stringify(userData), { maxAge: 900000, httpOnly: true });
                     // console.log(req.session.user);
                     res.redirect("dashboard");
                 }else{
@@ -59,6 +61,7 @@ const login = async(req,res)=>{
 
 const logout = async(req,res)=>{
     try {
+        res.clearCookie('userCookie');
         req.session.destroy();
         res.redirect("/");
     } catch (error) {
@@ -69,6 +72,7 @@ const logout = async(req,res)=>{
 const loadDashboard = async(req,res)=>{
     try {
         // console.log(req.session.user);
+        res.clearCookie('user');
         var users = await User.find({ _id:{ $nin:[req.session.user._id] } });
         res.render('dashboard',{user:req.session.user,users:users});
         // res.render('dashboard',{user:req.session.user});

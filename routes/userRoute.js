@@ -8,6 +8,9 @@ const session = require('express-session');
 const {SESSION_SECRET} = process.env;
 user_route.use(session({secret:SESSION_SECRET,resave: false,saveUninitialized: false }));
 
+const cookieParser = require('cookie-parser');
+user_route.use(cookieParser());
+
 user_route.use(bodyParser.json());
 user_route.use(bodyParser.urlencoded({extended:true}));
 
